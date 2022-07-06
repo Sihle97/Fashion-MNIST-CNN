@@ -32,3 +32,22 @@ print("X_val shape", X_val.shape)
 print("y_val shape", y_val.shape)
 print("X_test shape", X_test.shape)
 print("y_test shape", y_test.shape)
+
+# Again, do some formatting
+# Except don't flatten images into a 784-length vector so that 2D convolutions can first be performed
+
+X_train = X_train.astype('float32')         # change integers to 32-bit floating point numbers
+X_val = X_val.astype('float32')
+X_test = X_test.astype('float32')
+
+X_train /= 255                              # normalize each value for each pixel for the entire vector for each input
+X_val /= 255
+X_test /= 255
+
+X_train = X_train.reshape(-1,28,28,1)
+X_val = X_val.reshape(-1,28,28,1)
+X_test = X_test.reshape(-1,28,28,1)
+
+print("Training matrix shape", X_train.shape)
+print("Validation matrix shape", X_val.shape)
+print("Testing matrix shape", X_test.shape)
