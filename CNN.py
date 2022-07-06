@@ -150,3 +150,19 @@ gen = ImageDataGenerator(
 gen2 = ImageDataGenerator()
 
 train_gen = gen.flow(X_train, y_train, batch_size=batch_sz)
+
+# Fit the model
+history = model.fit(train_gen, batch_size=batch_sz, epochs=num_epochs, validation_data=(X_val, y_val), verbose=1)
+
+# plot history in terms of accuracy per epoch
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'validation'], loc='upper left')
+plt.show()
+
+score = model.evaluate(X_test, y_test)
+print('Test score with Augmentation:', score[0])
+print('Test accuracy with Augmentation:', score[1])
