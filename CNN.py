@@ -65,3 +65,12 @@ for i in range(36):
     label_index = int(y_train[i])
     plt.title(class_names[label_index])
 plt.show()
+
+#One-hot encoding
+# one-hot format classes
+
+nb_classes = 10 # number of unique digits
+
+y_train = np_utils.to_categorical(y_train, nb_classes)
+y_val = np_utils.to_categorical(y_val, nb_classes)
+y_test = np_utils.to_categorical(y_test, nb_classes)
