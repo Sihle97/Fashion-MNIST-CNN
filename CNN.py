@@ -51,3 +51,17 @@ X_test = X_test.reshape(-1,28,28,1)
 print("Training matrix shape", X_train.shape)
 print("Validation matrix shape", X_val.shape)
 print("Testing matrix shape", X_test.shape)
+
+#Visualisation
+class_names = ['T_shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 
+               'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+plt.figure(figsize=(10, 10))
+for i in range(36):
+    plt.subplot(6, 6, i + 1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(X_train[i].reshape((28,28)))
+    label_index = int(y_train[i])
+    plt.title(class_names[label_index])
+plt.show()
