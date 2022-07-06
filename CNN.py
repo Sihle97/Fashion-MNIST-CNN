@@ -114,3 +114,16 @@ model.add(Activation('relu'))                        # activation
 # Fully Connected Layer 6
 model.add(Dense(10))                                 # final 10 FCN nodes
 model.add(Activation('softmax'))                     # softmax activation
+
+model.summary()
+
+# we'll use the same optimizer
+
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+# Besides loss function considerations as before, this method actually results in significant memory savings
+# because we are actually LOADING the data into the network in batches before processing each batch
+batch_sz = 128
+num_epochs = 100
+
+model.fit(X_train, y_train, batch_size=batch_sz, epochs=num_epochs, validation_data=(X_val, y_val), verbose=1)
