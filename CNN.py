@@ -166,3 +166,11 @@ plt.show()
 score = model.evaluate(X_test, y_test)
 print('Test score with Augmentation:', score[0])
 print('Test accuracy with Augmentation:', score[1])
+
+#Displaying how the layers were learning how to classify the various item
+!pip install keract
+from keract import get_activations, display_heatmaps, display_activations
+keract_inputs = X_test[0:1]
+keract_targets = y_test[0:1]
+activations = get_activations(model, keract_inputs)
+display_activations(activations, cmap="gray", directory='Activations/', fig_size=(9, 9))
