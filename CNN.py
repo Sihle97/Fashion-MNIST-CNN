@@ -74,3 +74,43 @@ nb_classes = 10 # number of unique digits
 y_train = np_utils.to_categorical(y_train, nb_classes)
 y_val = np_utils.to_categorical(y_val, nb_classes)
 y_test = np_utils.to_categorical(y_test, nb_classes)
+
+#Layers
+model = Sequential()                                 # Linear stacking of layers
+
+# Convolution Layer 1
+model.add(Conv2D(32, (3, 3), input_shape=(28,28,1))) # 32 different 3x3 kernels -- so 32 feature maps
+model.add(BatchNormalization(axis=-1))               # normalize each feature map before activation
+model.add(Activation('relu'))                        # activation
+# model.add(Dropout(0.2))                              # 20% dropout of randomly selected nodes
+
+# Convolution Layer 2
+model.add(Conv2D(32, (3, 3)))                        # 32 different 3x3 kernels -- so 32 feature maps
+model.add(BatchNormalization(axis=-1))               # normalize each feature map before activation
+model.add(Activation('relu'))                        # activation
+model.add(MaxPooling2D(pool_size=(2,2)))         # Pool the max values over a 2x2 kernel
+model.add(Dropout(0.2))                              # 20% dropout of randomly selected nodes
+
+# Convolution Layer 3
+model.add(Conv2D(64,(3, 3)))                         # 64 different 3x3 kernels -- so 64 feature maps
+model.add(BatchNormalization(axis=-1))               # normalize each feature map before activation
+model.add(Activation('relu'))                     # activation
+# model.add(Dropout(0.2))                              # 20% dropout of randomly selected nodes
+
+# Convolution Layer 4
+model.add(Conv2D(64, (3, 3)))                        # 64 different 3x3 kernels -- so 64 feature maps
+model.add(BatchNormalization(axis=-1))               # normalize each feature map before activation
+model.add(Activation('relu'))                        # activation
+model.add(MaxPooling2D(pool_size=(2,2)))          # Pool the max values over a 2x2 kernel
+model.add(Flatten())                                 # Flatten final 4x4x64 output matrix into a 1024-length vector
+# model.add(Dropout(0.2))                              # 20% dropout of randomly selected nodes
+
+# Fully Connected Layer 5
+model.add(Dense(512))                                # 512 FCN nodes
+model.add(BatchNormalization())                      # normalization
+model.add(Activation('relu'))                        # activation
+# model.add(Dropout(0.2))                              # 20% dropout of randomly selected nodes
+
+# Fully Connected Layer 6
+model.add(Dense(10))                                 # final 10 FCN nodes
+model.add(Activation('softmax'))                     # softmax activation
